@@ -16,6 +16,55 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.selenium.component.PageObject
+import uk.gov.hmrc.driver.BrowserDriver
+import org.scalatest.matchers.must.Matchers
+import org.scalatestplus.selenium.{Page, WebBrowser}
 
-trait BasePage extends PageObject {}
+import org.openqa.selenium.{By, Cookie, JavascriptExecutor, WebDriver, WebElement}
+import uk.gov.hmrc.selenium.component.PageObject
+import uk.gov.hmrc.selenium.webdriver.Driver
+import org.openqa.selenium.By.tagName
+import scala.jdk.CollectionConverters.CollectionHasAsScala
+
+import java.util.logging.Level.SEVERE
+import scala.jdk.CollectionConverters._
+
+trait BasePage extends PageObject with BrowserDriver {
+  val url: String
+
+  def goTo(): Unit = get(url)
+
+  def userConsentCookie: Cookie = driver().manage().getCookieNamed("userConsent")
+
+  def windowLoadedGtmEvent: AnyRef = findDataLayerEvent("gtm.load")
+
+  def optimizelyOptOutEvent: AnyRef = findOptimizelyOptOutEvent(true)
+
+  def optimizelyOptInEvent: AnyRef = findOptimizelyOptOutEvent(false)
+
+  def measurementAllowedGtmEvent: AnyRef = findDataLayerEvent("trackingConsentMeasurementAccepted")
+
+  def settingsAllowedGtmEvent: AnyRef = findDataLayerEvent("trackingConsentSettingsAccepted")
+
+  def h1Element: WebElement = findBy(By.cssSelector("h1"))
+
+  def h2Text(): String = Driver.instance.findElement(tagName("h2")).getText
+
+  def h3Element: WebElement = findBy(By.cssSelector("h3"))
+
+  def confirmationMessageBanner: WebElement = findBy(By.cssSelector("h2.govuk-notification-banner__title"))
+
+  def consoleErrors: Seq[String] = {
+    val logs = driver().manage().logs().get("browser").asScala
+    logs
+      .filter(_.getLevel == SEVERE)
+      .map(_.getMessage)
+      .toSeq
+  }
+
+  def renderedHtml: String =
+    driver()
+      .asInstanceOf[JavascriptExecutor]
+      .executeScript("return document.getElementsByTagName('html')[0].outerHTML")
+      .toString
+}

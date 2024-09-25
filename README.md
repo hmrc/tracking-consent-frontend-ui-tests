@@ -1,8 +1,6 @@
-**This is the template README. Please update this with project specific content.**
-
 # tracking-consent-frontend-ui-tests
 
-<SERVICE_NAME> UI journey tests.
+Tracking Consent Frontend UI tests.
 
 ## Pre-requisites
 
@@ -14,22 +12,13 @@ Start Mongo Docker container as follows:
 docker run --rm -d -p 27017:27017 --name mongo percona/percona-server-mongodb:5.0
 ```
 
-Start `<SERVICE_MANAGER_PROFILE>` services as follows:
+Start `TRACKING_CONSENT_FRONTEND` services as follows:
 
 ```bash
-sm2 --start <SERVICE_MANAGER_PROFILE>
+sm2 --start TRACKING_CONSENT_FRONTEND
 ```
 
 ## Tests
-
-Run tests as follows:
-
-* Argument `<browser>` must be `chrome`, `edge`, or `firefox`.
-* Argument `<environment>` must be `local`, `dev`, `qa` or `staging`.
-
-```bash
-sbt clean -Dbrowser="<browser>" -Denvironment="<environment>" "testOnly uk.gov.hmrc.ui.specs.*" testReport
-```
 
 ## Scalafmt
 
@@ -49,6 +38,24 @@ Format all project files as follows:
 
 ```bash
 sbt scalafmtAll
+```
+
+## Tests
+
+Run tests as follows:
+
+* Argument `<prepare>` can be `clean` or `scalafmtAll`
+* Argument `<browser>` must be `chrome`, `edge`, or `firefox`.
+* Argument `<environment>` must be `local`, `dev`, `qa` or `staging`.
+
+```bash
+sbt `<prepare>` -Dbrowser="<browser>" -Denvironment="<environment>" "testOnly uk.gov.hmrc.ui.specs.*" testReport
+```
+
+Example:
+
+```bash
+sbt scalafmtAll -Dbrowser="chrome" -Denvironment="local" "testOnly uk.gov.hmrc.ui.specs.*" testReport
 ```
 
 ## License
