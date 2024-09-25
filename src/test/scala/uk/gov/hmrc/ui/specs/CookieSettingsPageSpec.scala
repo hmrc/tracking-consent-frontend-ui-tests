@@ -57,15 +57,14 @@ class CookieSettingsPageSpec extends BaseAcceptanceSpec {
     And("clicks submit")
     submitButton.click()
 
-    // TODO
-    // And("refreshes the page")
-    // reloadPage()
+    And("refreshes the page")
+    driver().navigate().refresh()
 
-    // Then("the consent setting 'Use cookies that measure my website use' is selected")
-    // useMeasurementCookiesInput.isSelected should be(true)
+    Then("the consent setting 'Use cookies that measure my website use' is selected")
+    useMeasurementCookiesInput.isSelected should be(true)
 
-    // And("the consent setting 'Use cookies that remember my settings on the site' is selected")
-    // useSettingsCookiesInput.isSelected should be(true)
+    And("the consent setting 'Use cookies that remember my settings on the site' is selected")
+    useSettingsCookiesInput.isSelected should be(true)
   }
 
   Scenario("The user refusing consent for all cookies is remembered") {
@@ -84,15 +83,14 @@ class CookieSettingsPageSpec extends BaseAcceptanceSpec {
     And("clicks submit")
     submitButton.click()
 
-    // TODO
-    //  And("refreshes the page")
-    //  reloadPage()
+    And("refreshes the page")
+    driver().navigate().refresh()
 
-    //  Then("the consent setting 'Do not use cookies that measure my website use' is selected")
-    //  doNotUseMeasurementCookiesInput.isSelected should be(true)
+    Then("the consent setting 'Do not use cookies that measure my website use' is selected")
+    doNotUseMeasurementCookiesInput.isSelected should be(true)
 
-    //  And("the consent setting 'Do not use cookies that remember my settings on the site' is selected")
-    //  doNotUseSettingsCookiesInput.isSelected should be(true)
+    And("the consent setting 'Do not use cookies that remember my settings on the site' is selected")
+    doNotUseSettingsCookiesInput.isSelected should be(true)
   }
 
   Scenario("The user granting consent for all cookies triggers GTM") {

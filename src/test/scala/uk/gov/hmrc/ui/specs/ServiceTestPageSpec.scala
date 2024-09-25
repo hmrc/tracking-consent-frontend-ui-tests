@@ -85,14 +85,13 @@ class ServiceTestPageSpec extends BaseAcceptanceSpec {
       acceptAdditionalCookiesButton.click()
 
       And("refreshes the page")
-      // TODO
-      // reloadPage()
+      driver().navigate().refresh()
 
-      // Then("the optimizely object does not contain the optOut event")
-      // optimizelyOptOutEvent should be(null)
+      Then("the optimizely object does not contain the optOut event")
+      optimizelyOptOutEvent should be(null)
 
-      // And("the optimizely object contains the optIn event")
-      // optimizelyOptInEvent should not be null
+      And("the optimizely object contains the optIn event")
+      optimizelyOptInEvent should not be null
     }
 
     Scenario("The user consenting to all cookies sets consent cookie") {
@@ -164,9 +163,8 @@ class ServiceTestPageSpec extends BaseAcceptanceSpec {
       eventually {
         ServiceTestPage.h2Text() shouldBe "Cookies on HMRC services"
       }
-      // TODO
-      //   And("no Javascript console errors are thrown")
-      //   consoleErrors should equal(Seq.empty)
+      And("no Javascript console errors are thrown")
+      consoleErrors should equal(Seq.empty)
     }
 
     Scenario("An accessible banner is displayed", Local) {
@@ -181,10 +179,6 @@ class ServiceTestPageSpec extends BaseAcceptanceSpec {
       eventually {
         ServiceTestPage.h2Text() shouldBe "Cookies on HMRC services"
       }
-
-      And("the page is still accessible")
-      // TODO
-      // ServiceTestPage.renderedHtml should passAccessibilityChecks
     }
 
     Scenario("The user consenting to all cookies displays an accessible save confirmation", Local) {
@@ -200,10 +194,6 @@ class ServiceTestPageSpec extends BaseAcceptanceSpec {
 
       When("the user clicks 'Accept all cookies'")
       acceptAdditionalCookiesButton.click()
-
-      Then("the page is still accessible")
-      // TODO
-      // ServiceTestPage.renderedHtml should passAccessibilityChecks
     }
   }
 }

@@ -17,14 +17,10 @@
 package uk.gov.hmrc.ui.pages
 
 import uk.gov.hmrc.driver.BrowserDriver
-import org.scalatest.matchers.must.Matchers
-import org.scalatestplus.selenium.{Page, WebBrowser}
-
-import org.openqa.selenium.{By, Cookie, JavascriptExecutor, WebDriver, WebElement}
+import org.openqa.selenium.{By, Cookie, JavascriptExecutor, WebElement}
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 import org.openqa.selenium.By.tagName
-import scala.jdk.CollectionConverters.CollectionHasAsScala
 
 import java.util.logging.Level.SEVERE
 import scala.jdk.CollectionConverters._
