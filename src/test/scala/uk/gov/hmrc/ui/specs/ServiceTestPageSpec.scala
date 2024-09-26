@@ -18,7 +18,6 @@ package uk.gov.hmrc.ui.specs
 
 import uk.gov.hmrc.ui.pages.ServiceTestPage
 import uk.gov.hmrc.ui.pages.ServiceTestPage._
-import uk.gov.hmrc.ui.specs.tags.Local
 import org.scalatest.tagobjects.Retryable
 
 class ServiceTestPageSpec extends BaseAcceptanceSpec {
@@ -167,8 +166,7 @@ class ServiceTestPageSpec extends BaseAcceptanceSpec {
       consoleErrors should equal(Seq.empty)
     }
 
-    Scenario("An accessible banner is displayed", Local) {
-      pending
+    Scenario("An accessible banner is displayed") {
       Given("the user clears their cookies")
       driver().manage().deleteAllCookies()
 
@@ -181,8 +179,7 @@ class ServiceTestPageSpec extends BaseAcceptanceSpec {
       }
     }
 
-    Scenario("The user consenting to all cookies displays an accessible save confirmation", Local) {
-      pending
+    Scenario("The user consenting to all cookies displays an accessible save confirmation") {
       Given("the user clears their cookies")
       driver().manage().deleteAllCookies()
 
