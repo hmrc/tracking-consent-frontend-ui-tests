@@ -24,7 +24,7 @@ class ServiceTestPageSpec extends BaseSpec {
   Feature("Service Test page") {
     Scenario("The user's consent is not initially assumed either way") {
       Given("Given the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       When("the user visits the service test page")
       ServiceTestPage.goTo()
@@ -38,7 +38,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
     Scenario("The user is initially opted out from Optimizely") {
       Given("Given the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       When("the user visits the service test page")
       ServiceTestPage.goTo()
@@ -52,7 +52,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
     Scenario("The user consenting to all cookies fires GTM") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       And("the user visits the service test page")
       ServiceTestPage.goTo()
@@ -72,7 +72,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
     Scenario("The user consenting to all cookies opts the user into optimizely on the next page load") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       And("the user visits the service test page")
       ServiceTestPage.goTo()
@@ -95,7 +95,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
     Scenario("The user consenting to all cookies sets consent cookie") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       And("the user visits the service test page")
       ServiceTestPage.goTo()
@@ -109,7 +109,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
     Scenario("The user rejecting additional cookies sets consent cookie") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       And("the user visits the service test page")
       ServiceTestPage.goTo()
@@ -123,7 +123,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
     Scenario("The user rejecting additional cookies does not fire GTM") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       And("the user visits the service test page")
       ServiceTestPage.goTo()
@@ -140,7 +140,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
     Scenario("The user visits a page and the cookie banner is displayed") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       When("the user visits the service test page")
       ServiceTestPage.goTo()
@@ -153,7 +153,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
     Scenario("No Javascript errors occur", Retryable) {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       When("the user visits the service test page")
       ServiceTestPage.goTo()
@@ -168,7 +168,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
     Scenario("An accessible banner is displayed") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       When("the user visits the service test page")
       ServiceTestPage.goTo()
@@ -181,7 +181,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
     Scenario("The user consenting to all cookies displays an accessible save confirmation") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       And("the user visits the service test page")
       ServiceTestPage.goTo()

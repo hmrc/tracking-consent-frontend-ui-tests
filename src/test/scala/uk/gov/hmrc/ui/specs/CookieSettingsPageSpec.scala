@@ -23,7 +23,7 @@ class CookieSettingsPageSpec extends BaseSpec {
 
   Scenario("The user's consent is initially assumed to be 'do not consent' for every option") {
     Given("the user clears their cookies")
-    driver().manage().deleteAllCookies()
+    deleteAllCookies()
 
     When("the user visits the cookie settings page")
     CookieSettingsPage.goTo()
@@ -43,7 +43,7 @@ class CookieSettingsPageSpec extends BaseSpec {
 
   Scenario("The user consenting for all cookies is remembered") {
     Given("the user clears their cookies")
-    driver().manage().deleteAllCookies()
+    deleteAllCookies()
 
     And("the user visits the cookie settings page")
     CookieSettingsPage.goTo()
@@ -69,7 +69,7 @@ class CookieSettingsPageSpec extends BaseSpec {
 
   Scenario("The user refusing consent for all cookies is remembered") {
     Given("the user clears their cookies")
-    driver().manage().deleteAllCookies()
+    deleteAllCookies()
 
     And("the user visits the cookie settings page")
     CookieSettingsPage.goTo()
@@ -95,7 +95,7 @@ class CookieSettingsPageSpec extends BaseSpec {
 
   Scenario("The user granting consent for all cookies triggers GTM") {
     Given("the user clears their cookies")
-    driver().manage().deleteAllCookies()
+    deleteAllCookies()
 
     And("the user visits the cookie settings page")
     CookieSettingsPage.goTo()
@@ -118,7 +118,7 @@ class CookieSettingsPageSpec extends BaseSpec {
 
   Scenario("The user granting consent for all cookies sets the userConsent cookie") {
     Given("the user clears their cookies")
-    driver().manage().deleteAllCookies()
+    deleteAllCookies()
 
     And("the user visits the cookie settings page")
     CookieSettingsPage.goTo()
@@ -140,7 +140,7 @@ class CookieSettingsPageSpec extends BaseSpec {
 
   Scenario("The user saving their consent sees a confirmation banner") {
     Given("the user clears their cookies")
-    driver().manage().deleteAllCookies()
+    deleteAllCookies()
 
     And("the user visits the cookie settings page")
     CookieSettingsPage.goTo()
@@ -155,7 +155,7 @@ class CookieSettingsPageSpec extends BaseSpec {
 
   Scenario("The user changing their language sees all content in Welsh") {
     Given("the user clears their cookies")
-    driver().manage().deleteAllCookies()
+    deleteAllCookies()
 
     And("the user visits the cookie settings page")
     CookieSettingsPage.goTo()
@@ -174,7 +174,7 @@ class CookieSettingsPageSpec extends BaseSpec {
 
   Scenario("No Javascript errors occur", Retryable) {
     Given("the user clears their cookies")
-    driver().manage().deleteAllCookies()
+    deleteAllCookies()
 
     When("the user visits the cookie settings page")
     CookieSettingsPage.goTo()

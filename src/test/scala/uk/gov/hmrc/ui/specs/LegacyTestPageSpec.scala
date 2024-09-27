@@ -24,7 +24,7 @@ class LegacyTestPageSpec extends BaseSpec {
   Feature("Legacy Service Test page") {
     Scenario("No Javascript errors occur", Retryable) {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       When("the user visits the legacy service test page")
       LegacyServiceTestPage.goTo()

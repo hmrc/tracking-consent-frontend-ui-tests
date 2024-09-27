@@ -24,7 +24,7 @@ class ErrorPageSpec extends BaseSpec {
 
     Scenario("GTM is loaded into the page with the default container") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       When("the user visits a non-existent page")
       ErrorPage.goTo()
@@ -37,7 +37,7 @@ class ErrorPageSpec extends BaseSpec {
 
     Scenario("The dataLayer is initialised") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       When("the user visits a non-existent page")
       ErrorPage.goTo()
@@ -50,7 +50,7 @@ class ErrorPageSpec extends BaseSpec {
 
     Scenario("The page has the correct title") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       When("the user visits a non-existent page")
       ErrorPage.goTo()
@@ -61,7 +61,7 @@ class ErrorPageSpec extends BaseSpec {
 
     Scenario("The user sees the cookie banner") {
       Given("the user clears their cookies")
-      driver().manage().deleteAllCookies()
+      deleteAllCookies()
 
       When("the user visits the service test page")
       ErrorPage.goTo()
