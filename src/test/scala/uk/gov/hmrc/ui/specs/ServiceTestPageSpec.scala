@@ -30,10 +30,10 @@ class ServiceTestPageSpec extends BaseSpec {
       ServiceTestPage.goTo()
 
       Then("the dataLayer does not contain the 'trackingConsentMeasurementAccepted' event")
-      measurementAllowedGtmEvent should be(null)
+      measurementAllowedGtmEvent() should be(null)
 
       And("the dataLayer does not contain the 'trackingConsentSettingsAccepted' event")
-      settingsAllowedGtmEvent should be(null)
+      settingsAllowedGtmEvent() should be(null)
     }
 
     Scenario("The user is initially opted out from Optimizely") {
@@ -44,10 +44,10 @@ class ServiceTestPageSpec extends BaseSpec {
       ServiceTestPage.goTo()
 
       Then("the optimizely object contains the optOut event")
-      optimizelyOptOutEvent should not be null
+      optimizelyOptOutEvent() should not be null
 
       And("the optimizely object does not contain the optIn event")
-      optimizelyOptInEvent should be(null)
+      optimizelyOptInEvent() should be(null)
     }
 
     Scenario("The user consenting to all cookies fires GTM") {
@@ -57,17 +57,17 @@ class ServiceTestPageSpec extends BaseSpec {
       And("the user visits the service test page")
       ServiceTestPage.goTo()
       eventually {
-        ServiceTestPage.h2Text() shouldBe "Cookies on HMRC services"
+        ServiceTestPage.getH2Text() shouldBe "Cookies on HMRC services"
       }
 
       When("the user clicks 'Accept all cookies'")
       clickAcceptAdditionalCookiesButton()
 
       Then("the dataLayer contains the 'trackingConsentMeasurementAccepted' event")
-      measurementAllowedGtmEvent should not be null
+      measurementAllowedGtmEvent() should not be null
 
       And("the dataLayer contains the 'trackingConsentSettingsAccepted' event")
-      settingsAllowedGtmEvent should not be null
+      settingsAllowedGtmEvent() should not be null
     }
 
     Scenario("The user consenting to all cookies opts the user into optimizely on the next page load") {
@@ -77,7 +77,7 @@ class ServiceTestPageSpec extends BaseSpec {
       And("the user visits the service test page")
       ServiceTestPage.goTo()
       eventually {
-        ServiceTestPage.h2Text() shouldBe "Cookies on HMRC services"
+        ServiceTestPage.getH2Text() shouldBe "Cookies on HMRC services"
       }
 
       When("the user clicks 'Accept all cookies'")
@@ -87,10 +87,10 @@ class ServiceTestPageSpec extends BaseSpec {
       refreshPage()
 
       Then("the optimizely object does not contain the optOut event")
-      optimizelyOptOutEvent should be(null)
+      optimizelyOptOutEvent() should be(null)
 
       And("the optimizely object contains the optIn event")
-      optimizelyOptInEvent should not be null
+      optimizelyOptInEvent() should not be null
     }
 
     Scenario("The user consenting to all cookies sets consent cookie") {
@@ -104,7 +104,7 @@ class ServiceTestPageSpec extends BaseSpec {
       clickAcceptAdditionalCookiesButton()
 
       Then("the userConsent cookie is set")
-      userConsentCookie.getValue should include("%22preferences%22:{%22measurement%22:true%2C%22settings%22:true}}")
+      getUserConsentCookie() should include("%22preferences%22:{%22measurement%22:true%2C%22settings%22:true}}")
     }
 
     Scenario("The user rejecting additional cookies sets consent cookie") {
@@ -118,7 +118,7 @@ class ServiceTestPageSpec extends BaseSpec {
       clickRejectAdditionalCookiesButton()
 
       Then("the userConsent cookie is set")
-      userConsentCookie.getValue should include("%22preferences%22:{%22measurement%22:false%2C%22settings%22:false}}")
+      getUserConsentCookie() should include("%22preferences%22:{%22measurement%22:false%2C%22settings%22:false}}")
     }
 
     Scenario("The user rejecting additional cookies does not fire GTM") {
@@ -147,7 +147,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
       Then("there should be the heading 'Cookies on HMRC services'")
       eventually {
-        ServiceTestPage.h2Text() shouldBe "Cookies on HMRC services"
+        getH2Text() shouldBe "Cookies on HMRC services"
       }
     }
 
@@ -160,7 +160,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
       Then("the banner should be displayed with the title 'Cookies on HMRC services'")
       eventually {
-        ServiceTestPage.h2Text() shouldBe "Cookies on HMRC services"
+        getH2Text() shouldBe "Cookies on HMRC services"
       }
       And("no Javascript console errors are thrown")
       consoleErrors should equal(Seq.empty)
@@ -175,7 +175,7 @@ class ServiceTestPageSpec extends BaseSpec {
 
       Then("the banner should be displayed with the title 'Cookies on HMRC services'")
       eventually {
-        ServiceTestPage.h2Text() shouldBe "Cookies on HMRC services"
+        getH2Text() shouldBe "Cookies on HMRC services"
       }
     }
 
@@ -186,7 +186,7 @@ class ServiceTestPageSpec extends BaseSpec {
       And("the user visits the service test page")
       ServiceTestPage.goTo()
       eventually {
-        ServiceTestPage.h2Text() shouldBe "Cookies on HMRC services"
+        getH2Text() shouldBe "Cookies on HMRC services"
       }
 
       When("the user clicks 'Accept all cookies'")

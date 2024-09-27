@@ -21,6 +21,7 @@ import org.openqa.selenium.{By, Cookie, JavascriptExecutor, WebDriver, WebElemen
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 import org.openqa.selenium.By.tagName
+import org.scalatestplus.play.BrowserFactory.UnneededDriver.findElement
 
 import java.util.logging.Level.SEVERE
 import scala.jdk.CollectionConverters._
@@ -32,31 +33,31 @@ trait BasePage extends PageObject with LazyLogging {
 
   def goTo(): Unit = get(url)
 
-  def deleteAllCookies() = driver().manage().deleteAllCookies()
+  def deleteAllCookies(): Unit = driver().manage().deleteAllCookies()
 
-  def refreshPage() = driver().navigate().refresh()
+  def refreshPage(): Unit = driver().navigate().refresh()
 
-  def userConsentCookie: Cookie = driver().manage().getCookieNamed("userConsent")
+  def getUserConsentCookie(): String = driver().manage().getCookieNamed("userConsent").getValue
 
-  def windowLoadedGtmEvent: AnyRef = findDataLayerEvent("gtm.load")
+  def windowLoadedGtmEvent(): AnyRef = findDataLayerEvent("gtm.load")
 
-  def optimizelyOptOutEvent: AnyRef = findOptimizelyOptOutEvent(true)
+  def optimizelyOptOutEvent(): AnyRef = findOptimizelyOptOutEvent(true)
 
-  def optimizelyOptInEvent: AnyRef = findOptimizelyOptOutEvent(false)
+  def optimizelyOptInEvent(): AnyRef = findOptimizelyOptOutEvent(false)
 
-  def measurementAllowedGtmEvent: AnyRef = findDataLayerEvent("trackingConsentMeasurementAccepted")
+  def measurementAllowedGtmEvent(): AnyRef = findDataLayerEvent("trackingConsentMeasurementAccepted")
 
-  def settingsAllowedGtmEvent: AnyRef = findDataLayerEvent("trackingConsentSettingsAccepted")
+  def settingsAllowedGtmEvent(): AnyRef = findDataLayerEvent("trackingConsentSettingsAccepted")
 
-  def h1Element: WebElement = findBy(By.cssSelector("h1"))
+  def getH1Text(): String = findBy(By.cssSelector("h1")).getText
 
-  def h2Text(): String = Driver.instance.findElement(tagName("h2")).getText
+  def getH2Text(): String = findBy(tagName("h2")).getText
 
-  def h3Element: WebElement = findBy(By.cssSelector("h3"))
+  def getH3Text(): String = findBy(By.cssSelector("h3")).getText
 
-  def confirmationMessageBanner: WebElement = findBy(By.cssSelector("h2.govuk-notification-banner__title"))
+  def getConfirmationMessageBanner(): String = findBy(By.cssSelector("h2.govuk-notification-banner__title")).getText
 
-  def consoleErrors: Seq[String] = {
+  def consoleErrors(): Seq[String] = {
     val logs = driver().manage().logs().get("browser").asScala
     logs
       .filter(_.getLevel == SEVERE)
@@ -64,13 +65,13 @@ trait BasePage extends PageObject with LazyLogging {
       .toSeq
   }
 
-  def renderedHtml: String =
+  def renderedHtml(): String =
     driver()
       .asInstanceOf[JavascriptExecutor]
       .executeScript("return document.getElementsByTagName('html')[0].outerHTML")
       .toString
 
-  def findBy(by: By): WebElement = driver.findElement(by)
+  def findBy(by: By): WebElement = driver().findElement(by)
 
   def labelByPartialText(partialText: String): By =
     By.xpath(s"""//label[contains(text(),'$partialText')]""")

@@ -21,5 +21,5 @@ import uk.gov.hmrc.configuration.TestEnvironment
 object LegacyServiceTestPage extends BasePage {
   val url: String = TestEnvironment.url("tracking-consent-frontend") + "/test-only/legacy"
 
-  val title = "Legacy service test page"
+  val title: String = "Legacy service test page"
 }

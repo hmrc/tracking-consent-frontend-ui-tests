@@ -56,7 +56,7 @@ class ErrorPageSpec extends BaseSpec {
       ErrorPage.goTo()
 
       Then("the title should be visible")
-      h1Element.getText should be(title)
+      getH1Text() should be(title)
     }
 
     Scenario("The user sees the cookie banner") {
@@ -68,7 +68,7 @@ class ErrorPageSpec extends BaseSpec {
 
       Then("the cookie banner is visible")
       eventually {
-        acceptAdditionalCookiesButton should not be null
+        acceptAdditionalCookiesButton() should not be null
       }
     }
   }

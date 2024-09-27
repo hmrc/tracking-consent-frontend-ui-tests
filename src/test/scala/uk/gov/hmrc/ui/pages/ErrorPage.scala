@@ -20,11 +20,11 @@ import org.openqa.selenium.{By, WebElement}
 import uk.gov.hmrc.configuration.TestEnvironment
 
 object ErrorPage extends BasePage {
-  val url: String             = TestEnvironment.url("tracking-consent-frontend") + "/test-only/non-existent-page"
-  val title                   = "This page can’t be found"
-  val acceptAdditionalCookies = "Accept additional cookies"
-  val setCookiePreferences    = "View cookie preferences"
+  val url: String                     = TestEnvironment.url("tracking-consent-frontend") + "/test-only/non-existent-page"
+  val title: String                   = "This page can’t be found"
+  val acceptAdditionalCookies: String = "Accept additional cookies"
+  val setCookiePreferences: String    = "View cookie preferences"
 
-  def acceptAdditionalCookiesButton: WebElement = findBy(buttonByPartialText(acceptAdditionalCookies))
-  def gtmScript: WebElement                     = findBy(By.cssSelector(s"""script[src*="gtm.js?id=GTM-NDJKHWK"]"""))
+  def acceptAdditionalCookiesButton(): WebElement = findBy(buttonByPartialText(acceptAdditionalCookies))
+  def gtmScript(): WebElement                     = findBy(By.cssSelector(s"""script[src*="gtm.js?id=GTM-NDJKHWK"]"""))
 }

@@ -111,10 +111,10 @@ class CookieSettingsPageSpec extends BaseSpec {
     clickSubmitButton()
 
     Then("the dataLayer contains the 'trackingConsentMeasurementAccepted' event")
-    measurementAllowedGtmEvent should not be null
+    measurementAllowedGtmEvent() should not be null
 
     And("the dataLayer contains the 'trackingConsentSettingsAccepted' event")
-    settingsAllowedGtmEvent should not be null
+    settingsAllowedGtmEvent() should not be null
   }
 
   Scenario("The user granting consent for all cookies sets the userConsent cookie") {
@@ -134,7 +134,7 @@ class CookieSettingsPageSpec extends BaseSpec {
     clickSubmitButton()
 
     Then("the userConsent cookie is set")
-    userConsentCookie.getValue should include(
+    getUserConsentCookie() should include(
       "%22preferences%22:{%22measurement%22:true%2C%22settings%22:true}"
     )
   }
@@ -150,8 +150,8 @@ class CookieSettingsPageSpec extends BaseSpec {
     clickSubmitButton()
 
     Then("the user should see the banner confirming save")
-    confirmationMessageBanner.getText shouldBe "Success"
-    h3Element.getText                 shouldBe "Your cookie settings were saved"
+    getConfirmationMessageBanner() shouldBe "Success"
+    getH3Text()                    shouldBe "Your cookie settings were saved"
   }
 
   Scenario("The user changing their language sees all content in Welsh") {
@@ -163,14 +163,14 @@ class CookieSettingsPageSpec extends BaseSpec {
 
     And("the user translates the page to Welsh")
     CookieSettingsPage.switchLanguageToWelsh()
-    h1Element.getText shouldBe "Gosodiadau cwcis ar wasanaethau CThEF"
+    getH1Text() shouldBe "Gosodiadau cwcis ar wasanaethau CThEF"
 
     When("clicks submit")
     clickWelshSubmitButton()
 
     Then("the user should see the banner confirming save")
-    confirmationMessageBanner.getText shouldBe "Llwyddiant"
-    h3Element.getText                 shouldBe "Wedi cadw’ch gosodiadau cwcis"
+    getConfirmationMessageBanner() shouldBe "Llwyddiant"
+    getH3Text()                    shouldBe "Wedi cadw’ch gosodiadau cwcis"
   }
 
   Scenario("No Javascript errors occur", Retryable) {

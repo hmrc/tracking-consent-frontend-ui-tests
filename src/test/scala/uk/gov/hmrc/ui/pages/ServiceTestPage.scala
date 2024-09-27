@@ -22,12 +22,12 @@ object ServiceTestPage extends BasePage {
   val url: String =
     TestEnvironment.url("tracking-consent-frontend") + "/test-only"
 
-  val title                   = "Service test page"
-  val acceptAdditionalCookies = "Accept additional cookies"
-  val rejectAdditionalCookies = "Reject additional cookies"
-  val setCookiePreferences    = "View cookie preferences"
+  val title: String                   = "Service test page"
+  val acceptAdditionalCookies: String = "Accept additional cookies"
+  val rejectAdditionalCookies: String = "Reject additional cookies"
+  val setCookiePreferences: String    = "View cookie preferences"
 
-  def clickAcceptAdditionalCookiesButton() = click(buttonByPartialText(acceptAdditionalCookies))
-  def clickRejectAdditionalCookiesButton() = click(buttonByPartialText(rejectAdditionalCookies))
-  def clickSetCookiePreferencesButton()    = click(labelByPartialText(setCookiePreferences))
+  def clickAcceptAdditionalCookiesButton(): Unit = click(buttonByPartialText(acceptAdditionalCookies))
+  def clickRejectAdditionalCookiesButton(): Unit = click(buttonByPartialText(rejectAdditionalCookies))
+  def clickSetCookiePreferencesButton(): Unit    = click(labelByPartialText(setCookiePreferences))
 }

@@ -23,24 +23,24 @@ import org.openqa.selenium.By
 object CookieSettingsPage extends BasePage {
   val url: String = TestEnvironment.url("tracking-consent-frontend") + "/cookie-settings"
 
-  val useMeasurementCookies                  = "Use cookies that measure my website use"
-  def clickUseMeasurementCookies()           = click(labelByPartialText(useMeasurementCookies))
+  val useMeasurementCookies: String          = "Use cookies that measure my website use"
+  def clickUseMeasurementCookies(): Unit     = click(labelByPartialText(useMeasurementCookies))
   def useMeasurementCookiesInput: WebElement = findBy(inputByLabelPartialText(useMeasurementCookies))
 
-  val doNotUseMeasurementCookies                  = "Do not use cookies that measure my website use"
-  def clickDoNotUseMeasurementCookies()           = click(labelByPartialText(doNotUseMeasurementCookies))
+  val doNotUseMeasurementCookies: String          = "Do not use cookies that measure my website use"
+  def clickDoNotUseMeasurementCookies(): Unit     = click(labelByPartialText(doNotUseMeasurementCookies))
   def doNotUseMeasurementCookiesInput: WebElement = findBy(inputByLabelPartialText(doNotUseMeasurementCookies))
 
-  val useSettingsCookies                  = "Use cookies that remember my settings on services"
-  def clickUseSettingsCookies()           = click(labelByPartialText(useSettingsCookies))
+  val useSettingsCookies: String          = "Use cookies that remember my settings on services"
+  def clickUseSettingsCookies(): Unit     = click(labelByPartialText(useSettingsCookies))
   def useSettingsCookiesInput: WebElement = findBy(inputByLabelPartialText(useSettingsCookies))
 
-  val doNotUseSettingsCookies                  = "Do not use cookies that remember my settings on services"
-  def clickDoNotUseSettingsCookies()           = click(labelByPartialText(doNotUseSettingsCookies))
+  val doNotUseSettingsCookies: String          = "Do not use cookies that remember my settings on services"
+  def clickDoNotUseSettingsCookies(): Unit     = click(labelByPartialText(doNotUseSettingsCookies))
   def doNotUseSettingsCookiesInput: WebElement = findBy(inputByLabelPartialText(doNotUseSettingsCookies))
 
-  def clickSubmitButton()      = click(buttonByPartialText("Save changes"))
-  def clickWelshSubmitButton() = click(buttonByPartialText("Cadw newidiadau"))
+  def clickSubmitButton(): Unit      = click(buttonByPartialText("Save changes"))
+  def clickWelshSubmitButton(): Unit = click(buttonByPartialText("Cadw newidiadau"))
 
   def switchLanguageToWelsh(): Unit = click(By.partialLinkText("Cymraeg"))
 }
