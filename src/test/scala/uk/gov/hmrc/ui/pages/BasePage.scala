@@ -17,11 +17,10 @@
 package uk.gov.hmrc.ui.pages
 
 import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.{By, Cookie, JavascriptExecutor, WebDriver, WebElement}
+import org.openqa.selenium.{By, JavascriptExecutor, WebDriver, WebElement}
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 import org.openqa.selenium.By.tagName
-import org.scalatestplus.play.BrowserFactory.UnneededDriver.findElement
 
 import java.util.logging.Level.SEVERE
 import scala.jdk.CollectionConverters._
