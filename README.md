@@ -15,7 +15,7 @@ docker run --rm -d -p 27017:27017 --name mongo percona/percona-server-mongodb:5.
 Start `TRACKING_CONSENT_FRONTEND` services as follows:
 
 ```bash
-sm2 --start TRACKING_CONSENT_FRONTEND`
+sm2 --start TRACKING_CONSENT_FRONTEND
 ```
 
 ## Tests
