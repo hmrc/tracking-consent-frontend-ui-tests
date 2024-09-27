@@ -19,7 +19,7 @@ package uk.gov.hmrc.ui.specs
 import uk.gov.hmrc.ui.pages.ErrorPage
 import uk.gov.hmrc.ui.pages.ErrorPage._
 
-class ErrorPageSpec extends BaseAcceptanceSpec {
+class ErrorPageSpec extends BaseSpec {
   Feature("Error page") {
 
     Scenario("GTM is loaded into the page with the default container") {

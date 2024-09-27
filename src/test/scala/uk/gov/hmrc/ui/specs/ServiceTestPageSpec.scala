@@ -20,7 +20,7 @@ import uk.gov.hmrc.ui.pages.ServiceTestPage
 import uk.gov.hmrc.ui.pages.ServiceTestPage._
 import org.scalatest.tagobjects.Retryable
 
-class ServiceTestPageSpec extends BaseAcceptanceSpec {
+class ServiceTestPageSpec extends BaseSpec {
   Feature("Service Test page") {
     Scenario("The user's consent is not initially assumed either way") {
       Given("Given the user clears their cookies")

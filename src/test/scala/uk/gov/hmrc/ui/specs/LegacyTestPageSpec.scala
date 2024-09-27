@@ -20,7 +20,7 @@ import uk.gov.hmrc.ui.pages.LegacyServiceTestPage
 import uk.gov.hmrc.ui.pages.LegacyServiceTestPage._
 import org.scalatest.tagobjects.Retryable
 
-class LegacyTestPageSpec extends BaseAcceptanceSpec {
+class LegacyTestPageSpec extends BaseSpec {
   Feature("Legacy Service Test page") {
     Scenario("No Javascript errors occur", Retryable) {
       Given("the user clears their cookies")

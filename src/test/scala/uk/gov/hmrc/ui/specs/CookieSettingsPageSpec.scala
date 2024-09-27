@@ -19,7 +19,7 @@ package uk.gov.hmrc.ui.specs
 import uk.gov.hmrc.ui.pages.CookieSettingsPage
 import uk.gov.hmrc.ui.pages.CookieSettingsPage._
 import org.scalatest.tagobjects.Retryable
-class CookieSettingsPageSpec extends BaseAcceptanceSpec {
+class CookieSettingsPageSpec extends BaseSpec {
 
   Scenario("The user's consent is initially assumed to be 'do not consent' for every option") {
     Given("the user clears their cookies")

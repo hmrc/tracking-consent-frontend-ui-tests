@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.driver.BrowserDriver
-import org.openqa.selenium.{By, Cookie, JavascriptExecutor, WebElement}
+import com.typesafe.scalalogging.LazyLogging
+import org.openqa.selenium.{By, Cookie, JavascriptExecutor, WebDriver, WebElement}
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 import org.openqa.selenium.By.tagName
@@ -25,8 +25,10 @@ import org.openqa.selenium.By.tagName
 import java.util.logging.Level.SEVERE
 import scala.jdk.CollectionConverters._
 
-trait BasePage extends PageObject with BrowserDriver {
+trait BasePage extends PageObject with LazyLogging {
   val url: String
+
+  def driver(): WebDriver = Driver.instance
 
   def goTo(): Unit = get(url)
 
@@ -63,4 +65,31 @@ trait BasePage extends PageObject with BrowserDriver {
       .asInstanceOf[JavascriptExecutor]
       .executeScript("return document.getElementsByTagName('html')[0].outerHTML")
       .toString
+
+  def findBy(by: By): WebElement = driver.findElement(by)
+
+  def findLabelByPartialText(partialText: String): WebElement =
+    findBy(By.xpath(s"""//label[contains(text(),'$partialText')]"""))
+
+  def findInputByLabelPartialText(partialText: String): WebElement =
+    findBy(By.xpath(s"""//input[@id=(//label[contains(text(), '$partialText')]/@for)]"""))
+
+  def findButtonByPartialText(partialText: String): WebElement =
+    findBy(By.xpath(s"""//button[contains(text(),'$partialText')]"""))
+
+  def findGtmScript(containerId: String): WebElement =
+    findBy(By.cssSelector(s"""script[src*="gtm.js?id=$containerId"]"""))
+
+  def findOptimizelyOptOutEvent(isOptOut: java.lang.Boolean): AnyRef =
+    driver()
+      .asInstanceOf[JavascriptExecutor]
+      .executeScript(
+        "return window.optimizely.find(({type, isOptOut}) => type === 'optOut' && isOptOut === arguments[0])",
+        isOptOut
+      )
+
+  def findDataLayerEvent(event: String): AnyRef =
+    driver()
+      .asInstanceOf[JavascriptExecutor]
+      .executeScript("return window.dataLayer.find(({event}) => event === arguments[0])", event)
 }
