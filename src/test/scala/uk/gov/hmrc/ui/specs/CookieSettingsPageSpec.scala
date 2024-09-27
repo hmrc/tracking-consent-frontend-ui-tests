@@ -58,7 +58,7 @@ class CookieSettingsPageSpec extends BaseSpec {
     submitButton.click()
 
     And("refreshes the page")
-    driver().navigate().refresh()
+    refreshPage()
 
     Then("the consent setting 'Use cookies that measure my website use' is selected")
     useMeasurementCookiesInput.isSelected should be(true)
@@ -84,7 +84,7 @@ class CookieSettingsPageSpec extends BaseSpec {
     submitButton.click()
 
     And("refreshes the page")
-    driver().navigate().refresh()
+    refreshPage()
 
     Then("the consent setting 'Do not use cookies that measure my website use' is selected")
     doNotUseMeasurementCookiesInput.isSelected should be(true)

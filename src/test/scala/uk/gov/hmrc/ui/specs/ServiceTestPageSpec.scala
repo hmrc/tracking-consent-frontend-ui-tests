@@ -84,7 +84,7 @@ class ServiceTestPageSpec extends BaseSpec {
       acceptAdditionalCookiesButton.click()
 
       And("refreshes the page")
-      driver().navigate().refresh()
+      refreshPage()
 
       Then("the optimizely object does not contain the optOut event")
       optimizelyOptOutEvent should be(null)

@@ -34,6 +34,8 @@ trait BasePage extends PageObject with LazyLogging {
 
   def deleteAllCookies() = driver().manage().deleteAllCookies()
 
+  def refreshPage() = driver().navigate().refresh()
+
   def userConsentCookie: Cookie = driver().manage().getCookieNamed("userConsent")
 
   def windowLoadedGtmEvent: AnyRef = findDataLayerEvent("gtm.load")

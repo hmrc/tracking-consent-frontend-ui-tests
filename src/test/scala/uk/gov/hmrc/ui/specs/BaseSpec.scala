@@ -20,7 +20,6 @@ import org.scalatest.concurrent.{Eventually, IntegrationPatience}
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.{BeforeAndAfterEach, GivenWhenThen, Retries}
-import org.scalatestplus.selenium.WebBrowser
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 
 trait BaseSpec
