@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.WebElement
+import org.openqa.selenium.{By, WebElement}
 import uk.gov.hmrc.configuration.TestEnvironment
 
 object ErrorPage extends BasePage {
@@ -25,7 +25,6 @@ object ErrorPage extends BasePage {
   val acceptAdditionalCookies = "Accept additional cookies"
   val setCookiePreferences    = "View cookie preferences"
 
-  def acceptAdditionalCookiesButton: WebElement = findButtonByPartialText(acceptAdditionalCookies)
-  def setCookiePreferencesButton: WebElement    = findLabelByPartialText(setCookiePreferences)
-  def gtmScript: WebElement                     = findGtmScript("GTM-NDJKHWK")
+  def acceptAdditionalCookiesButton: WebElement = findBy(buttonByPartialText(acceptAdditionalCookies))
+  def gtmScript: WebElement                     = findBy(By.cssSelector(s"""script[src*="gtm.js?id=GTM-NDJKHWK"]"""))
 }

@@ -61,7 +61,7 @@ class ServiceTestPageSpec extends BaseSpec {
       }
 
       When("the user clicks 'Accept all cookies'")
-      acceptAdditionalCookiesButton.click()
+      clickAcceptAdditionalCookiesButton()
 
       Then("the dataLayer contains the 'trackingConsentMeasurementAccepted' event")
       measurementAllowedGtmEvent should not be null
@@ -81,7 +81,7 @@ class ServiceTestPageSpec extends BaseSpec {
       }
 
       When("the user clicks 'Accept all cookies'")
-      acceptAdditionalCookiesButton.click()
+      clickAcceptAdditionalCookiesButton()
 
       And("refreshes the page")
       refreshPage()
@@ -101,7 +101,7 @@ class ServiceTestPageSpec extends BaseSpec {
       ServiceTestPage.goTo()
 
       When("the user clicks 'Accept all cookies'")
-      acceptAdditionalCookiesButton.click()
+      clickAcceptAdditionalCookiesButton()
 
       Then("the userConsent cookie is set")
       userConsentCookie.getValue should include("%22preferences%22:{%22measurement%22:true%2C%22settings%22:true}}")
@@ -115,7 +115,7 @@ class ServiceTestPageSpec extends BaseSpec {
       ServiceTestPage.goTo()
 
       When("the user clicks 'Accept all cookies'")
-      rejectAdditionalCookiesButton.click()
+      clickRejectAdditionalCookiesButton()
 
       Then("the userConsent cookie is set")
       userConsentCookie.getValue should include("%22preferences%22:{%22measurement%22:false%2C%22settings%22:false}}")
@@ -128,8 +128,8 @@ class ServiceTestPageSpec extends BaseSpec {
       And("the user visits the service test page")
       ServiceTestPage.goTo()
 
-      When("the user clicks 'Accept all cookies'")
-      rejectAdditionalCookiesButton.click()
+      When("the user clicks 'Reject all cookies'")
+      clickRejectAdditionalCookiesButton()
 
       Then("the dataLayer does not contain the 'trackingConsentMeasurementAccepted' event")
       measurementAllowedGtmEvent should be(null)
@@ -190,7 +190,7 @@ class ServiceTestPageSpec extends BaseSpec {
       }
 
       When("the user clicks 'Accept all cookies'")
-      acceptAdditionalCookiesButton.click()
+      clickAcceptAdditionalCookiesButton()
     }
   }
 }

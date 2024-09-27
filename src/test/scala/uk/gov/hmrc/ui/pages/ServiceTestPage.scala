@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.WebElement
 import uk.gov.hmrc.configuration.TestEnvironment
 
 object ServiceTestPage extends BasePage {
@@ -28,7 +27,7 @@ object ServiceTestPage extends BasePage {
   val rejectAdditionalCookies = "Reject additional cookies"
   val setCookiePreferences    = "View cookie preferences"
 
-  def acceptAdditionalCookiesButton: WebElement = findButtonByPartialText(acceptAdditionalCookies)
-  def rejectAdditionalCookiesButton: WebElement = findButtonByPartialText(rejectAdditionalCookies)
-  def setCookiePreferencesButton: WebElement    = findLabelByPartialText(setCookiePreferences)
+  def clickAcceptAdditionalCookiesButton() = click(buttonByPartialText(acceptAdditionalCookies))
+  def clickRejectAdditionalCookiesButton() = click(buttonByPartialText(rejectAdditionalCookies))
+  def clickSetCookiePreferencesButton()    = click(labelByPartialText(setCookiePreferences))
 }

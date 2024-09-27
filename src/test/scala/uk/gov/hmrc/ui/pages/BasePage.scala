@@ -72,17 +72,14 @@ trait BasePage extends PageObject with LazyLogging {
 
   def findBy(by: By): WebElement = driver.findElement(by)
 
-  def findLabelByPartialText(partialText: String): WebElement =
-    findBy(By.xpath(s"""//label[contains(text(),'$partialText')]"""))
+  def labelByPartialText(partialText: String): By =
+    By.xpath(s"""//label[contains(text(),'$partialText')]""")
 
-  def findInputByLabelPartialText(partialText: String): WebElement =
-    findBy(By.xpath(s"""//input[@id=(//label[contains(text(), '$partialText')]/@for)]"""))
+  def inputByLabelPartialText(partialText: String): By =
+    By.xpath(s"""//input[@id=(//label[contains(text(), '$partialText')]/@for)]""")
 
-  def findButtonByPartialText(partialText: String): WebElement =
-    findBy(By.xpath(s"""//button[contains(text(),'$partialText')]"""))
-
-  def findGtmScript(containerId: String): WebElement =
-    findBy(By.cssSelector(s"""script[src*="gtm.js?id=$containerId"]"""))
+  def buttonByPartialText(partialText: String): By =
+    By.xpath(s"""//button[contains(text(),'$partialText')]""")
 
   def findOptimizelyOptOutEvent(isOptOut: java.lang.Boolean): AnyRef =
     driver()

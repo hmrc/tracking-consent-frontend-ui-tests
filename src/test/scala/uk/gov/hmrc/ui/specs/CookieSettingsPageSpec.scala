@@ -19,6 +19,7 @@ package uk.gov.hmrc.ui.specs
 import uk.gov.hmrc.ui.pages.CookieSettingsPage
 import uk.gov.hmrc.ui.pages.CookieSettingsPage._
 import org.scalatest.tagobjects.Retryable
+
 class CookieSettingsPageSpec extends BaseSpec {
 
   Scenario("The user's consent is initially assumed to be 'do not consent' for every option") {
@@ -49,13 +50,13 @@ class CookieSettingsPageSpec extends BaseSpec {
     CookieSettingsPage.goTo()
 
     When("the user chooses 'Use cookies that measure my website use'")
-    useMeasurementCookiesLabel.click()
+    clickUseMeasurementCookies()
 
     And("the user chooses 'Use cookies that remember my settings on the site'")
-    useSettingsCookiesLabel.click()
+    clickUseSettingsCookies()
 
     And("clicks submit")
-    submitButton.click()
+    clickSubmitButton()
 
     And("refreshes the page")
     refreshPage()
@@ -75,13 +76,13 @@ class CookieSettingsPageSpec extends BaseSpec {
     CookieSettingsPage.goTo()
 
     When("the user chooses 'Do not use cookies that measure my website use'")
-    doNotUseMeasurementCookiesLabel.click()
+    clickDoNotUseMeasurementCookies()
 
     And("the user chooses 'Do not use cookies that remember my settings on the site'")
-    doNotUseSettingsCookiesLabel.click()
+    clickDoNotUseSettingsCookies()
 
     And("clicks submit")
-    submitButton.click()
+    clickSubmitButton()
 
     And("refreshes the page")
     refreshPage()
@@ -101,13 +102,13 @@ class CookieSettingsPageSpec extends BaseSpec {
     CookieSettingsPage.goTo()
 
     When("the user chooses 'Use cookies that measure my website use'")
-    useMeasurementCookiesLabel.click()
+    clickUseMeasurementCookies()
 
     And("the user chooses 'Use cookies that remember my settings on the site'")
-    useSettingsCookiesLabel.click()
+    clickUseSettingsCookies()
 
     And("clicks submit")
-    submitButton.click()
+    clickSubmitButton()
 
     Then("the dataLayer contains the 'trackingConsentMeasurementAccepted' event")
     measurementAllowedGtmEvent should not be null
@@ -124,13 +125,13 @@ class CookieSettingsPageSpec extends BaseSpec {
     CookieSettingsPage.goTo()
 
     When("the user chooses 'Use cookies that measure my website use'")
-    useMeasurementCookiesLabel.click()
+    clickUseMeasurementCookies()
 
     And("the user chooses 'Use cookies that remember my settings on the site'")
-    useSettingsCookiesLabel.click()
+    clickUseSettingsCookies()
 
     And("clicks submit")
-    submitButton.click()
+    clickSubmitButton()
 
     Then("the userConsent cookie is set")
     userConsentCookie.getValue should include(
@@ -146,7 +147,7 @@ class CookieSettingsPageSpec extends BaseSpec {
     CookieSettingsPage.goTo()
 
     When("clicks submit")
-    submitButton.click()
+    clickSubmitButton()
 
     Then("the user should see the banner confirming save")
     confirmationMessageBanner.getText shouldBe "Success"
@@ -165,7 +166,7 @@ class CookieSettingsPageSpec extends BaseSpec {
     h1Element.getText shouldBe "Gosodiadau cwcis ar wasanaethau CThEF"
 
     When("clicks submit")
-    welshSubmitButton.click()
+    clickWelshSubmitButton()
 
     Then("the user should see the banner confirming save")
     confirmationMessageBanner.getText shouldBe "Llwyddiant"
