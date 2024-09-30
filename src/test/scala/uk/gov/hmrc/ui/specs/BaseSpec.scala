@@ -16,17 +16,21 @@
 
 package uk.gov.hmrc.ui.specs
 
+import org.scalatest.concurrent.{Eventually, IntegrationPatience}
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.matchers.should.Matchers
-import org.scalatest.{BeforeAndAfterEach, GivenWhenThen}
+import org.scalatest.{BeforeAndAfterEach, GivenWhenThen, Retries}
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 
 trait BaseSpec
     extends AnyFeatureSpec
     with GivenWhenThen
-    with Matchers
     with BeforeAndAfterEach
+    with Matchers
+    with Retries
     with Browser
+    with Eventually
+    with IntegrationPatience
     with ScreenshotOnFailure {
 
   override def beforeEach(): Unit =
@@ -34,5 +38,4 @@ trait BaseSpec
 
   override def afterEach(): Unit =
     quitBrowser()
-
 }
