@@ -1,5 +1,5 @@
 lazy val root = (project in file("."))
-  .disablePlugins(JUnitXmlReportPlugin) //Required to prevent https://github.com/scalatest/scalatest/issues/1427
+  .disablePlugins(JUnitXmlReportPlugin) // Required to prevent https://github.com/scalatest/scalatest/issues/1427
   .settings(
     name := "tracking-consent-frontend-ui-tests",
     version := "0.1.0",
