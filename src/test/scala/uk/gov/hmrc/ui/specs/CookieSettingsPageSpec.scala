@@ -16,11 +16,13 @@
 
 package uk.gov.hmrc.ui.specs
 
+import uk.gov.hmrc.ui.utils.RequestCaptureFilter
 import uk.gov.hmrc.ui.pages.CookieSettingsPage
 import uk.gov.hmrc.ui.pages.CookieSettingsPage._
 import org.scalatest.tagobjects.Retryable
+import java.nio.charset.Charset
 
-class CookieSettingsPageSpec extends BaseSpec {
+class CookieSettingsPageSpec extends BaseSpec with RequestCaptureFilter {
 
   Scenario("The user's consent is initially assumed to be 'do not consent' for every option") {
     Given("the user clears their cookies")
@@ -115,6 +117,32 @@ class CookieSettingsPageSpec extends BaseSpec {
 
     And("the dataLayer contains the 'trackingConsentSettingsAccepted' event")
     settingsAllowedGtmEvent() should not be null
+  }
+
+  Scenario("The user granting consent for all cookies triggers audit event") {
+    Given("the user clears their cookies")
+    deleteAllCookies()
+
+    And("the user visits the cookie settings page")
+    CookieSettingsPage.goTo()
+
+    When("the user chooses 'Use cookies that measure my website use'")
+    clickUseMeasurementCookies()
+
+    And("the user chooses 'Use cookies that remember my settings on the site'")
+    clickUseSettingsCookies()
+
+    // Reset the intercepted network requests prior to clicking auditable event
+    deleteInterceptedRequests()
+
+    And("clicks submit")
+    clickSubmitButton()
+
+    Then("a request should be sent to the audit endpoint with the expected content")
+    interceptedRequestsContainUrlAndContent(
+      url = "/tracking-consent/audit",
+      content = "{\"measurement\":true,\"settings\":true}"
+    )
   }
 
   Scenario("The user granting consent for all cookies sets the userConsent cookie") {
