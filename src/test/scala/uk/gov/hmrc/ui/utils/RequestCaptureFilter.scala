@@ -29,7 +29,7 @@ trait RequestCaptureFilter extends TestSuiteMixin { this: TestSuite =>
 
   def deleteInterceptedRequests(): Unit = interceptedRequests = Seq.empty
 
-  def interceptedRequestsContainUrlAndContent(url: String, content: String) =
+  def interceptedRequestsContainUrlAndContent(url: String, content: String): Boolean =
     interceptedRequests
       .find(_.getUri.endsWith(url))
       .exists(_.getContent.contentAsString(Charset.defaultCharset()) == content)

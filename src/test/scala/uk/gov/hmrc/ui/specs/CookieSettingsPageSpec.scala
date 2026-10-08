@@ -20,7 +20,6 @@ import uk.gov.hmrc.ui.utils.RequestCaptureFilter
 import uk.gov.hmrc.ui.pages.CookieSettingsPage
 import uk.gov.hmrc.ui.pages.CookieSettingsPage._
 import org.scalatest.tagobjects.Retryable
-import java.nio.charset.Charset
 
 class CookieSettingsPageSpec extends BaseSpec with RequestCaptureFilter {
 

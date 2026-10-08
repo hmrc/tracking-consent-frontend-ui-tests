@@ -20,7 +20,6 @@ import uk.gov.hmrc.ui.utils.RequestCaptureFilter
 import uk.gov.hmrc.ui.pages.ServiceTestPage
 import uk.gov.hmrc.ui.pages.ServiceTestPage._
 import org.scalatest.tagobjects.Retryable
-import java.nio.charset.Charset
 
 class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
   Feature("Service Test page") {
