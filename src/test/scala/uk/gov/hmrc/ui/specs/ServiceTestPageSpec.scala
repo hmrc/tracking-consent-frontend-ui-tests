@@ -16,11 +16,12 @@
 
 package uk.gov.hmrc.ui.specs
 
+import uk.gov.hmrc.ui.utils.RequestCaptureFilter
 import uk.gov.hmrc.ui.pages.ServiceTestPage
 import uk.gov.hmrc.ui.pages.ServiceTestPage._
 import org.scalatest.tagobjects.Retryable
 
-class ServiceTestPageSpec extends BaseSpec {
+class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
   Feature("Service Test page") {
     Scenario("The user's consent is not initially assumed either way") {
       Given("Given the user clears their cookies")
@@ -191,6 +192,29 @@ class ServiceTestPageSpec extends BaseSpec {
 
       When("the user clicks 'Accept all cookies'")
       clickAcceptAdditionalCookiesButton()
+    }
+
+    Scenario("The user consenting to all cookies fires audit event") {
+      Given("the user clears their cookies")
+      deleteAllCookies()
+
+      And("the user visits the service test page")
+      ServiceTestPage.goTo()
+      eventually {
+        ServiceTestPage.getH2Text() shouldBe "Cookies on HMRC services"
+      }
+
+      // Reset the intercepted network requests prior to clicking auditable event
+      deleteInterceptedRequests()
+
+      When("the user clicks 'Accept all cookies'")
+      clickAcceptAdditionalCookiesButton()
+
+      Then("a request should be sent to the audit endpoint with the expected content")
+      interceptedRequestsContainUrlAndContent(
+        url = "/tracking-consent/audit",
+        content = "{\"measurement\":true,\"settings\":true}"
+      )
     }
   }
 }
