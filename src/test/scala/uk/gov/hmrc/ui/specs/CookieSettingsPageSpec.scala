@@ -138,8 +138,8 @@ class CookieSettingsPageSpec extends BaseSpec with RequestCaptureFilter {
     clickSubmitButton()
 
     Then("a request should be sent to the audit endpoint with the expected content")
-    interceptedRequestsContainUrlAndContent(
-      url = "/tracking-consent/audit",
+    interceptedRequestsContainPathAndContent(
+      path = "/tracking-consent/audit",
       content = "{\"measurement\":true,\"settings\":true}"
     ) shouldBe true
   }
@@ -208,6 +208,6 @@ class CookieSettingsPageSpec extends BaseSpec with RequestCaptureFilter {
     CookieSettingsPage.goTo()
 
     Then("no Javascript console errors are thrown")
-    consoleErrors should equal(Seq.empty)
+    consoleErrors() should equal(Seq.empty)
   }
 }

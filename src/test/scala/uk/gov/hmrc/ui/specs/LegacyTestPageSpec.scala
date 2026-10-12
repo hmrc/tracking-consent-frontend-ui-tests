@@ -35,7 +35,7 @@ class LegacyTestPageSpec extends BaseSpec {
       }
 
       And("no Javascript console errors are thrown")
-      consoleErrors should equal(Seq.empty)
+      consoleErrors() should equal(Seq.empty)
     }
   }
 }

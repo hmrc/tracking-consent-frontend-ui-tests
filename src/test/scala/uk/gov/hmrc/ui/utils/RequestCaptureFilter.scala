@@ -28,10 +28,14 @@ import scala.collection.concurrent.TrieMap
 trait RequestCaptureFilter extends TestSuiteMixin { this: TestSuite =>
   var interceptedRequests: TrieMap[String, HttpRequest] = new TrieMap()
 
-  def interceptedRequestsContainUrlAndContent(url: String, content: String): Boolean =
+  def interceptedRequestsContainPathAndContent(path: String, content: String): Boolean =
     interceptedRequests
-      .find(_._1.contains(url))
-      .exists(_._2.getContent.contentAsString(Charset.defaultCharset()) == content)
+      .find { case (url, _) =>
+        url.contains(path)
+      }
+      .exists { case (_, request) =>
+        request.getContent.contentAsString(Charset.defaultCharset()) == content
+      }
 
   abstract override def withFixture(test: NoArgTest): Outcome = {
     // Add a network interceptor with a filter that adds all requests to the sequence above
@@ -39,7 +43,7 @@ trait RequestCaptureFilter extends TestSuiteMixin { this: TestSuite =>
       new Augmenter().augment(Driver.instance),
       new Filter {
         override def apply(next: HttpHandler): HttpHandler = (request: HttpRequest) => {
-          interceptedRequests.addOne(request.getUri, request)
+          interceptedRequests.addOne((request.getUri, request))
           next.execute(request)
         }
       }
