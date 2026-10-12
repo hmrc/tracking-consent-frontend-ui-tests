@@ -141,7 +141,7 @@ class CookieSettingsPageSpec extends BaseSpec with RequestCaptureFilter {
     interceptedRequestsContainUrlAndContent(
       url = "/tracking-consent/audit",
       content = "{\"measurement\":true,\"settings\":true}"
-    )
+    ) shouldBe true
   }
 
   Scenario("The user granting consent for all cookies sets the userConsent cookie") {

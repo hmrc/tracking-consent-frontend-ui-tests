@@ -214,7 +214,7 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
       interceptedRequestsContainUrlAndContent(
         url = "/tracking-consent/audit",
         content = "{\"measurement\":true,\"settings\":true}"
-      )
+      ) shouldBe true
     }
   }
 }
