@@ -132,7 +132,7 @@ class CookieSettingsPageSpec extends BaseSpec with RequestCaptureFilter {
     clickUseSettingsCookies()
 
     // Reset the intercepted network requests prior to clicking auditable event
-    deleteInterceptedRequests()
+    interceptedRequests.clear()
 
     And("clicks submit")
     clickSubmitButton()

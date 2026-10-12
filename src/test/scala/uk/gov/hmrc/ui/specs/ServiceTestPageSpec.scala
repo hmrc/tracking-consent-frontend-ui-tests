@@ -205,7 +205,7 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
       }
 
       // Reset the intercepted network requests prior to clicking auditable event
-      deleteInterceptedRequests()
+      interceptedRequests.clear()
 
       When("the user clicks 'Accept all cookies'")
       clickAcceptAdditionalCookiesButton()

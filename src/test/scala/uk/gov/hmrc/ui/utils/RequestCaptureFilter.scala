@@ -28,8 +28,6 @@ import scala.collection.concurrent.TrieMap
 trait RequestCaptureFilter extends TestSuiteMixin { this: TestSuite =>
   var interceptedRequests: TrieMap[String, HttpRequest] = new TrieMap()
 
-  def deleteInterceptedRequests(): Unit = interceptedRequests.clear()
-
   def interceptedRequestsContainUrlAndContent(url: String, content: String): Boolean =
     interceptedRequests
       .find(_._1.contains(url))
