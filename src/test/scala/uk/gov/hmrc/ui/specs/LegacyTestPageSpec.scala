@@ -30,9 +30,7 @@ class LegacyTestPageSpec extends BaseSpec {
       LegacyServiceTestPage.goTo()
 
       Then("the banner should be displayed with the title 'Cookies on HMRC services'")
-      eventually {
-        getH2Text() shouldBe "Cookies on HMRC services"
-      }
+      getH2Text() shouldBe "Cookies on HMRC services"
 
       And("no Javascript console errors are thrown")
       consoleErrors() should equal(Seq.empty)

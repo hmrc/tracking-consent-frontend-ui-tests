@@ -57,9 +57,7 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
 
       And("the user visits the service test page")
       ServiceTestPage.goTo()
-      eventually {
-        ServiceTestPage.getH2Text() shouldBe "Cookies on HMRC services"
-      }
+      getH2Text() shouldBe "Cookies on HMRC services"
 
       When("the user clicks 'Accept all cookies'")
       clickAcceptAdditionalCookiesButton()
@@ -77,9 +75,7 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
 
       And("the user visits the service test page")
       ServiceTestPage.goTo()
-      eventually {
-        ServiceTestPage.getH2Text() shouldBe "Cookies on HMRC services"
-      }
+      getH2Text() shouldBe "Cookies on HMRC services"
 
       When("the user clicks 'Accept all cookies'")
       clickAcceptAdditionalCookiesButton()
@@ -147,9 +143,7 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
       ServiceTestPage.goTo()
 
       Then("there should be the heading 'Cookies on HMRC services'")
-      eventually {
-        getH2Text() shouldBe "Cookies on HMRC services"
-      }
+      getH2Text() shouldBe "Cookies on HMRC services"
     }
 
     Scenario("No Javascript errors occur", Retryable) {
@@ -160,9 +154,8 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
       ServiceTestPage.goTo()
 
       Then("the banner should be displayed with the title 'Cookies on HMRC services'")
-      eventually {
-        getH2Text() shouldBe "Cookies on HMRC services"
-      }
+      getH2Text() shouldBe "Cookies on HMRC services"
+
       And("no Javascript console errors are thrown")
       consoleErrors() should equal(Seq.empty)
     }
@@ -175,9 +168,7 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
       ServiceTestPage.goTo()
 
       Then("the banner should be displayed with the title 'Cookies on HMRC services'")
-      eventually {
-        getH2Text() shouldBe "Cookies on HMRC services"
-      }
+      getH2Text() shouldBe "Cookies on HMRC services"
     }
 
     Scenario("The user consenting to all cookies displays an accessible save confirmation") {
@@ -186,9 +177,7 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
 
       And("the user visits the service test page")
       ServiceTestPage.goTo()
-      eventually {
-        getH2Text() shouldBe "Cookies on HMRC services"
-      }
+      getH2Text() shouldBe "Cookies on HMRC services"
 
       When("the user clicks 'Accept all cookies'")
       clickAcceptAdditionalCookiesButton()
@@ -200,9 +189,7 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
 
       And("the user visits the service test page")
       ServiceTestPage.goTo()
-      eventually {
-        ServiceTestPage.getH2Text() shouldBe "Cookies on HMRC services"
-      }
+      getH2Text() shouldBe "Cookies on HMRC services"
 
       // Reset the intercepted network requests prior to clicking auditable event
       interceptedRequests.clear()
