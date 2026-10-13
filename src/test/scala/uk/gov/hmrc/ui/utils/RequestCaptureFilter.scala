@@ -26,16 +26,14 @@ import java.nio.charset.Charset
 import scala.collection.concurrent.TrieMap
 
 trait RequestCaptureFilter extends TestSuiteMixin { this: TestSuite =>
-  var interceptedRequests: TrieMap[String, HttpRequest] = new TrieMap()
+  val interceptedRequests: TrieMap[String, HttpRequest] = new TrieMap()
 
   def interceptedRequestsContainPathAndContent(path: String, content: String): Boolean =
-    interceptedRequests
-      .find { case (url, _) =>
-        url.contains(path)
-      }
-      .exists { case (_, request) =>
+    interceptedRequests exists {
+      case (url, request) if url.contains(path) =>
         request.getContent.contentAsString(Charset.defaultCharset()) == content
-      }
+      case _                                    => false
+    }
 
   abstract override def withFixture(test: NoArgTest): Outcome = {
     // Add a network interceptor with a filter that adds all requests to the sequence above
