@@ -132,16 +132,16 @@ class CookieSettingsPageSpec extends BaseSpec with RequestCaptureFilter {
     clickUseSettingsCookies()
 
     // Reset the intercepted network requests prior to clicking auditable event
-    deleteInterceptedRequests()
+    interceptedRequests.clear()
 
     And("clicks submit")
     clickSubmitButton()
 
     Then("a request should be sent to the audit endpoint with the expected content")
-    interceptedRequestsContainUrlAndContent(
-      url = "/tracking-consent/audit",
+    interceptedRequestsContainPathAndContent(
+      path = "/tracking-consent/audit",
       content = "{\"measurement\":true,\"settings\":true}"
-    )
+    ) shouldBe true
   }
 
   Scenario("The user granting consent for all cookies sets the userConsent cookie") {
@@ -208,6 +208,6 @@ class CookieSettingsPageSpec extends BaseSpec with RequestCaptureFilter {
     CookieSettingsPage.goTo()
 
     Then("no Javascript console errors are thrown")
-    consoleErrors should equal(Seq.empty)
+    consoleErrors() should equal(Seq.empty)
   }
 }

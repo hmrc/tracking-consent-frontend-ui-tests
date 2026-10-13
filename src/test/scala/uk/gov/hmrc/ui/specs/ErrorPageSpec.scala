@@ -31,7 +31,7 @@ class ErrorPageSpec extends BaseSpec {
 
       Then("the gtm script is injected into the page")
       eventually {
-        gtmScript should not be null
+        gtmScript() should not be null
       }
     }
 
@@ -44,7 +44,7 @@ class ErrorPageSpec extends BaseSpec {
 
       Then("the dataLayer contains the Window loaded event")
       eventually {
-        windowLoadedGtmEvent should not be null
+        windowLoadedGtmEvent() should not be null
       }
     }
 

@@ -133,10 +133,10 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
       clickRejectAdditionalCookiesButton()
 
       Then("the dataLayer does not contain the 'trackingConsentMeasurementAccepted' event")
-      measurementAllowedGtmEvent should be(null)
+      measurementAllowedGtmEvent() should be(null)
 
       And("the dataLayer does not contain the 'trackingConsentSettingsAccepted' event")
-      settingsAllowedGtmEvent should be(null)
+      settingsAllowedGtmEvent() should be(null)
     }
 
     Scenario("The user visits a page and the cookie banner is displayed") {
@@ -164,7 +164,7 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
         getH2Text() shouldBe "Cookies on HMRC services"
       }
       And("no Javascript console errors are thrown")
-      consoleErrors should equal(Seq.empty)
+      consoleErrors() should equal(Seq.empty)
     }
 
     Scenario("An accessible banner is displayed") {
@@ -205,16 +205,16 @@ class ServiceTestPageSpec extends BaseSpec with RequestCaptureFilter {
       }
 
       // Reset the intercepted network requests prior to clicking auditable event
-      deleteInterceptedRequests()
+      interceptedRequests.clear()
 
       When("the user clicks 'Accept all cookies'")
       clickAcceptAdditionalCookiesButton()
 
       Then("a request should be sent to the audit endpoint with the expected content")
-      interceptedRequestsContainUrlAndContent(
-        url = "/tracking-consent/audit",
+      interceptedRequestsContainPathAndContent(
+        path = "/tracking-consent/audit",
         content = "{\"measurement\":true,\"settings\":true}"
-      )
+      ) shouldBe true
     }
   }
 }
