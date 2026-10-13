@@ -97,7 +97,7 @@ trait BasePage extends PageObject with LazyLogging {
       .asInstanceOf[JavascriptExecutor]
       .executeScript("return window.dataLayer.find(({event}) => event === arguments[0])", event)
 
-  def waitForElementToBePresent(locator: By): WebElement =
+  protected[pages] def waitForElementToBePresent(locator: By): WebElement =
     new FluentWait[WebDriver](Driver.instance)
       .withTimeout(Duration.ofSeconds(10))
       .pollingEvery(Duration.ofMillis(250))
