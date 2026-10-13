@@ -17,11 +17,13 @@
 package uk.gov.hmrc.ui.pages
 
 import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.{By, JavascriptExecutor, WebDriver, WebElement}
+import org.openqa.selenium.{By, JavascriptExecutor, StaleElementReferenceException, WebDriver, WebElement}
 import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 import org.openqa.selenium.By.tagName
+import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 
+import java.time.Duration
 import java.util.logging.Level.SEVERE
 import scala.jdk.CollectionConverters._
 
@@ -48,13 +50,14 @@ trait BasePage extends PageObject with LazyLogging {
 
   def settingsAllowedGtmEvent(): AnyRef = findDataLayerEvent("trackingConsentSettingsAccepted")
 
-  def getH1Text(): String = findBy(By.cssSelector("h1")).getText
+  def getH1Text(): String = getText(tagName("h1"))
 
-  def getH2Text(): String = findBy(tagName("h2")).getText
+  def getH2Text(): String = getText(tagName("h2"))
 
-  def getH3Text(): String = findBy(By.cssSelector("h3")).getText
+  def getH3Text(): String = getText(tagName("h3"))
 
-  def getConfirmationMessageBanner(): String = findBy(By.cssSelector("h2.govuk-notification-banner__title")).getText
+  def getConfirmationMessageBanner(): String =
+    getText(By.cssSelector("h2.govuk-notification-banner__title"))
 
   def consoleErrors(): Seq[String] = {
     val logs = driver().manage().logs().get("browser").asScala
@@ -93,4 +96,13 @@ trait BasePage extends PageObject with LazyLogging {
     driver()
       .asInstanceOf[JavascriptExecutor]
       .executeScript("return window.dataLayer.find(({event}) => event === arguments[0])", event)
+
+  def waitForElementToBePresent(locator: By): WebElement =
+    new FluentWait[WebDriver](Driver.instance)
+      .withTimeout(Duration.ofSeconds(10))
+      .pollingEvery(Duration.ofMillis(250))
+      .ignoring(classOf[NoSuchElementException])
+      .ignoring(classOf[StaleElementReferenceException])
+      .until(ExpectedConditions.presenceOfElementLocated(locator))
+
 }

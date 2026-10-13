@@ -30,9 +30,7 @@ class ErrorPageSpec extends BaseSpec {
       ErrorPage.goTo()
 
       Then("the gtm script is injected into the page")
-      eventually {
-        gtmScript() should not be null
-      }
+      gtmScript() should not be null
     }
 
     Scenario("The dataLayer is initialised") {
@@ -41,11 +39,10 @@ class ErrorPageSpec extends BaseSpec {
 
       When("the user visits a non-existent page")
       ErrorPage.goTo()
+      getH1Text() should be(title)
 
       Then("the dataLayer contains the Window loaded event")
-      eventually {
-        windowLoadedGtmEvent() should not be null
-      }
+      windowLoadedGtmEvent() should not be null
     }
 
     Scenario("The page has the correct title") {
@@ -65,11 +62,10 @@ class ErrorPageSpec extends BaseSpec {
 
       When("the user visits the service test page")
       ErrorPage.goTo()
+      getH1Text() should be(title)
 
       Then("the cookie banner is visible")
-      eventually {
-        acceptAdditionalCookiesButton() should not be null
-      }
+      acceptAdditionalCookiesButton() should not be null
     }
   }
 }

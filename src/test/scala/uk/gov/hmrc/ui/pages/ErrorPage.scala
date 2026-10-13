@@ -25,6 +25,9 @@ object ErrorPage extends BasePage {
   val acceptAdditionalCookies: String = "Accept additional cookies"
   val setCookiePreferences: String    = "View cookie preferences"
 
-  def acceptAdditionalCookiesButton(): WebElement = findBy(buttonByPartialText(acceptAdditionalCookies))
-  def gtmScript(): WebElement                     = findBy(By.cssSelector(s"""script[src*="gtm.js?id=GTM-NDJKHWK"]"""))
+  def acceptAdditionalCookiesButton(): WebElement =
+    waitForElementToBePresent(buttonByPartialText(acceptAdditionalCookies))
+
+  def gtmScript(): WebElement =
+    waitForElementToBePresent(By.cssSelector(s"""script[src*="gtm.js?id=GTM-NDJKHWK"]"""))
 }
