@@ -29,5 +29,5 @@ object ErrorPage extends BasePage {
     getElementWithFluentWait(buttonByPartialText(acceptAdditionalCookies))
 
   def gtmScript(): WebElement =
-    getElementWithFluentWait(By.cssSelector(s"""script[src*="gtm.js?id=GTM-NDJKHWK"]"""))
+    getElementWithFluentWait(By.cssSelector(s"""script[src*="gtm.js?id=GTM-NDC2ZX2K"]"""))
 }
